@@ -4,3 +4,5 @@ My solutions to the problem sets and exams for different courses offered on [MIT
 
 ## Courses
 
+[6.0001: Introduction to Computer Science and Programming in Python](https://github.com/ramanakshay/MITOCW/tree/main/6.0001)
+
