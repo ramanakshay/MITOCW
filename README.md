@@ -8,6 +8,6 @@ My solutions to the problem sets and exams for different courses offered on [MIT
 
 [6.092: Introduction to Programming in Java](https://github.com/ramanakshay/MITOCW/tree/main/6.092)
 
-[18.01: Single Variable Calculus](https://github.com/ramanakshay/MITOCW/tree/main/18.01) (till PS6)
+[18.01: Single Variable Calculus](https://github.com/ramanakshay/MITOCW/tree/main/18.01) (till PS5)
 
 [8.01: Classical Mechanics](https://github.com/ramanakshay/MITOCW/tree/main/8.01) (till PS6)
