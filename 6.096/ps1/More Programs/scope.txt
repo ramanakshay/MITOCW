@@ -1,0 +1,13 @@
+Scope
+
+1. The program doesn't compile. A compiler error is thrown.
+error: conflicting declaration 'char arg1'
+
+2. The program compiles. It outputs the character 'A'. 
+
+3. If the name accessed is within the inner block, the declaration of the inner nested block is used.
+
+4. The declaration of the outer block is used since the inner block declaration is deleted.
+
+5. The program doesn't compile because it cannot find the 'cout' function. It is found in the iostream file.
+Moving line 9 to the beginning will get the code to compile.
