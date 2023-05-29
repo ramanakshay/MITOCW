@@ -1,0 +1,13 @@
+Fix the Function
+
+3.1 Move function declaration before function invocation or create a function prototype before the invocation.
+
+3.2 Pass number as an argument or make number a global variable. The first approach is preferable as it avoids using global variables.
+
+3.3 Pass num be reference using & before the variable name in the argument.
+
+3.4 Add a return statement which returns diff.
+
+3.5 Add a third argument (say z) and return x+y+z.
+
+3.6 Add a * in line 7 - int *xPtr = arr, *yPtr = arr ...

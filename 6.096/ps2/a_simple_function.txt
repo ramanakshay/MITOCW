@@ -1,0 +1,9 @@
+A Simple Function
+
+Output:
+
+2
+246
+6
+8
+10
