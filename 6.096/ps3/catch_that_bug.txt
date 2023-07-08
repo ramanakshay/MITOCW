@@ -1,0 +1,15 @@
+2 Catch That Bug
+
+2.1 Missing semicolon in line 20. 
+
+2.2 The setX is a const member function so it cannot modify the object. 
+
+2.3 x and y are private members and cannot be accessed outside the class.
+
+2.4 Scope missing for setX function. Change function name to Point::setX(int newX) 
+for it to be called for an object.
+
+2.5 Since 'nums' is an array, need to use delete[] instead of delete in line 10.
+
+2.6 Memory not deallocated. Use delete p to deallocated point from heap memory.
+
