@@ -9,7 +9,7 @@ but if you have none and are motivated you will do fine. The course is recommend
 
 **Prerequisites**: None
 
-**Textbook**: None (refer lecture notes)
+**Textbook**: None
 
 **Topics Covered**:
   * Types, Variables, Operators
