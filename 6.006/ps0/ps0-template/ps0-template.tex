@@ -6,6 +6,10 @@
 \input{macros-sp20}
 \newcommand{\theproblemsetnum}{0}
 
+\usepackage{amsmath}
+\renewcommand{\qed}{\hfill\blacksquare}
+\newcommand{\qedwhite}{\hfill \ensuremath{\Box}}
+
 \title{6.006 Problem Set 0}
 
 \begin{document}
@@ -15,7 +19,7 @@
 \setlength{\parindent}{0pt}
 \medskip\hrulefill\medskip
 
-{\bf Name:} Your Name
+{\bf Name:} Akshay Raman
 
 \medskip\hrulefill
 
@@ -74,33 +78,72 @@
 \problem  % Problem 1
 
 \begin{problemparts}
-\problempart % Problem 1a
-\problempart % Problem 1b
-\problempart % Problem 1c
+
+%\[ A = \{ \}, B = \{ \} \]
+
+\problempart \( A \cap B = \{ 6, 12 \}\) % Problem 1a
+\problempart \( |A \cup B| = | \{ 1,3,6,9,12,13,15 \} | = 7\) % Problem 1b
+\problempart \( |A - B| = |\{1,9,13\}| = 3\) % Problem 1c
+
 \end{problemparts}
 
 \problem  % Problem 2
 
 \begin{problemparts}
-\problempart % Problem 2a
-\problempart % Problem 2b
-\problempart % Problem 2c
+\problempart \(E[X] = \frac{1*0 + 3*1 + 3*2 + 1*3}{8} = 1.5 \)% Problem 2a
+\problempart \( E[Y] = \frac{21*21}{36} = 12.25 \) % Problem 2b
+\problempart \( E[X+Y] = E[X] + E[Y] = 13.75\) % Problem 2c
 \end{problemparts}
 
 \problem  % Problem 3
 
 \begin{problemparts}
-\problempart % Problem 3a
-\problempart % Problem 3b
-\problempart % Problem 3c
+\problempart \textbf{True. }\( 100 \equiv 18 \pmod{2} \iff 2 \vert 100-18 \iff 2 \vert 82\) % Problem 3a
+
+\problempart \textbf{False. }\( 100 \equiv 18 \pmod{3} \iff 3 \vert 100-18 \iff 3 \vert 82\)% Problem 3b
+
+\problempart \textbf{False. }\( 100 \equiv 18 \pmod{4} \iff 4 \vert 100-18 \iff 4 \vert 82\)% Problem 3c
 \end{problemparts}
 
 \problem  % Problem 4
 
-\newpage
-\problem  % Problem 5
+\textit{Proof by induction.}
 
+For all n  \in \mathbb{N},
+
+\[ P(n) := \sum_{i=1}^n{i^3} = \left[ \frac{n(n+1)}{2} \right]^2 \]
+
+\textbf{Base Case:} P(0) is true, both sides evaluate to 0.
+
+\textbf{Inductive Step:} Assume P(n) is true, where n is a non-negative integer.
+
+Then
+\[
+	\begin{split}
+		\sum_{i=1}^n i^3 + (n+1)^3  &= \left[ \frac{n(n+1)}{2} \right]^2 + (n+1)^3 \\
+			&= \frac{(n+1)^2(n^2 + 4n + 4)}{4} \\
+			&= \left[ \frac{(n+1)(n+2)}{2} \right]^2
+	\end{split}
+\]
+
+which proves P(n+1) is true.
+
+So it follows by induction that P(n) is true for all non-negative n. \qed
+
+\newpage
+
+\problem  % Problem 5
+	\textit{Proof by induction.}
+	
+	Let P(n) be the proposition that, for all \( n \geq 1\), any connected graph \(G = (V,E)\) with \(|V| = n\) and \(|E| = n-1\) is acyclic.
+	
+	\textbf{Base Case:} P(1) is true, since that graph only has a single vertex and no edges. 
+	
+	\textbf{Inductive Step:} Assume P(n) is true, where any connected graph G(n) with n vertices and n-1 edges is acyclic. Consider a connected graph G(n+1) with n+1 vertices and n edges. Since G(n+1) is connected, all vertices are connected by an edge. The average degree is \(2n/(n+1) < 2\). So there must be at least one vertex with degree 1. This vertex cannot be part of a cycle since nodes in a cycle require a degree \( \geq 2\). Removing this (weakest) vertex and the associated edge yields a graph in G(n) which is acyclic by P(n). So, P(n+1) is also true.
+	
+	So it follows by induction that P(n) is true for all \( n \geq 1 \). \qed
 \vfill
+
 \problem  % Problem 6
 Submit your implementation to {\small\url{alg.mit.edu}}.
 
@@ -110,11 +153,22 @@ def count_long_subarray(A):
     Input:  A     | Python Tuple of positive integers
     Output: count | number of longest increasing subarrays of A
     '''
-    count = 0
-    ##################
-    # YOUR CODE HERE #
-    ##################
+    count = 1
+    length = 1 	# max size
+    current = 1 #current subarray size
+    for i in range(1, len(A)):
+        if A[i-1] < A[i]:
+            current += 1
+        else:
+            current = 1
+            
+        if current == length:
+            count += 1
+        elif current > length:
+            length = current
+            count = 1
     return count
+    
 \end{lstlisting}
 
 \end{problems}
