@@ -123,7 +123,7 @@ Thinking recursively, to move a sub-sequence with k elements, we can move the fi
 
 After removing an item at index i. If $j>i$, the value of j decreases by 1 i.e. $j = j-1$. Also, when we insert an item after index $j$ and $j<i$, the entire subsequence shift to the right by one i.e. $i = i+1$. 
 
-The recursive procedure make no more than $O(k)$ recursive call. In each call, it does $O(\log n)$ work. Therefore, the running time of the algorithm is $O(k \log n).
+The recursive procedure make no more than $O(k)$ recursive call. In each call, it does $O(\log n)$ work. Therefore, the running time of the algorithm is $O(k \log n)$.
 
 \begin{lstlisting}[language=Python]
 MOVE(D, i, k, j):
@@ -145,14 +145,48 @@ MOVE(D, i, k, j):
 \newpage
 \problem  % Problem 3
 
+Store $n$ pages in a static array $S$ of size $3n$. This can be build in $O(n)$ time whenever $build(X)$ or \lstinline{place_mark(i, m)} is called. $S$ is divided into three sub-arrays $P_1, P_2, P_3$ of size $n$ with the bookmarks at the divisions. We maintain some indices: $a_s=0$, $a_e$ points to the end of $P_1$, $b_s$ points of the start of $P_2$, $b_e$ points to the end of $P_2$, $c_s$ points of the start of $P_3$, $c_e$ points to the end of $P_3$. 
+
+To support \lstinline{read_page(i)}, we calculate the actual index of the element using the pointer from above:
+
+\begin{itemize}
+	\item \quad If $i < |P_1| $, return $S[i]$.
+	\item \quad If $|P_1| \leq i < |P_1| + |P_2|$, return $S[b_s + i - a_e]$.
+	\item \quad Otherwise, return $S[c_s + i - a_e - (b_e - b_s)]$.  
+\end{itemize}
+
+The running time of this operation is worst-case $O(1)$.
+
+The procedure \lstinline{shift_mark(m,d)} involves moving the bookmark element one position left or right in the array. If we move bookmark A to the left, the rightmost element in $P_1$ becomes the first element in $P_2$. So we only have to make a single swap in $\Theta(1)$ and update pointers to preserve the invariant. Similarly, we can show that all such operations can be done in worst case $O(1)$ running time.
+
+\lstinline{move_page(m)} will take $O(1)$ time to move elements and update the pointers. However, if any sub-array $P_1, P_2, P_3$ exceeds its limit ($n$), we will have to rebuild the array with extra space. Since this rebuilding happens once every $n$ operations, the running time of this procedure is amortized $O(1)$ time.
+
+
+
+
 \newpage
 \problem  % Problem 4
 
 \begin{problemparts}
 \problempart % Problem 4a
+
+\begin{itemize}
+	\item  \lstinline{insert_first(x)}: Create a new node x. If the list is empty, set both $L.head$ and $L.tail$ to x. Otherwise, connect node $x$ to $L.head$ by updating their next and prev pointers. Then, we set $L.head$ to the newly created node x.
+	\item \lstinline{insert_last(x)}: Same as \lstinline{insert_first(x)} but this time we update $L.tail$ instead.
+	\item \lstinline{delete_first()}: Extract and store the head node from the list. Then update $L.head$ to the next node in the list. If there is no next node, then set $L.head$ to None.
+	\item \lstinline{delete_last()}: Extract and store the tail node from the list. Then update $L.tail$ to the previous node in the list. If there is no previous node, then set $L.tail$ to None.
+\end{itemize}
+
+
 \problempart % Problem 4b
+Construct a new list by setting $x_1$ and $x_2$ as the head and tail respectively. When $x_1$ or $x_2$ are ends of $L$, care must be taken to update $L.head$ and $L.tail$. If $L.head = x_1$, then set the new head to be the next node of $x_2$ (called $a$). Otherwise, set the next node of $x_1$'s previous node to $a$. If $L.tail = x_2$, then set the new tail to be the previous node of $x_1$ (called $b$). Otherwise, set the previous node of $x_2$'s next node to $b$. This algorithm remove nodes between $x_1$ and $x_2$ directly so it is correct. The running time is $O(1)$ since be make a constant number of pointer updates. 
+
 \problempart % Problem 4c
-\problempart Submit your implementation to {\small\url{alg.mit.edu}}.
+ To splice into $L_1$, first store the next value of $x$ in variable $x_{next}$. Then, set the next node of $x$ to $L_2.head$ (and previous node of $L_2.head$ to $x$). Also, we set previous node of $x_{next}$ to $L_2.tail$ (and next node of $L_2.tail$ to $x$). To make $L_2$ empty, we can simply set its head and tail to point to None. If $x_{next}$ is None, we set $L_1.tail$ to $L_2.tail$. This algorithm splices $L_2$ into $L_1$ directly, so it is correct. Since we make a constant number of pointer updates, the running
+ 
+\problempart This python implementation for all operations is given below:
+
+\lstinputlisting[language=Python]{Doubly_Linked_List_Seq.py}
 \end{problemparts}
 
 \end{problems}

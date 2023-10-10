@@ -36,40 +36,67 @@ class Doubly_Linked_List_Seq:
         node.item = x
 
     def insert_first(self, x):
-        ###########################
-        # Part (a): Implement me! #
-        ###########################
-        pass
+        new_node = Doubly_Linked_List_Node(x)
+        if self.head is None:
+            self.head = self.tail = new_node
+        else:
+            self.head.prev = new_node
+            new_node.next = self.head
+            self.head = new_node
+
+
 
     def insert_last(self, x):
-        ###########################
-        # Part (a): Implement me! #
-        ###########################
-        pass
+        new_node = Doubly_Linked_List_Node(x)
+        if self.tail is None:
+            self.head = self.tail = new_node
+        else:
+            self.tail.next = new_node
+            new_node.prev = self.tail
+            self.tail = new_node
 
     def delete_first(self):
-        x = None
-        ###########################
-        # Part (a): Implement me! #
-        ###########################
+        assert self.head
+        x = self.head.item
+        self.head = self.head.next
+        if self.head is None:
+            self.tail = None
+        else:
+            self.head.prev = None
         return x
 
     def delete_last(self):
-        x = None
-        ###########################
-        # Part (a): Implement me! #
-        ###########################
+        assert self.tail
+        x = self.tail.item
+        self.tail = self.tail.prev
+        if self.tail is None:
+            self.head = None
+        else:
+            self.tail.next = None
         return x
 
     def remove(self, x1, x2):
         L2 = Doubly_Linked_List_Seq()
-        ###########################
-        # Part (b): Implement me! # 
-        ###########################
+        L2.head = x1
+        L2.tail = x2
+        if x1 == self.head:
+            self.head = x2.next
+        else:
+            x1.prev.next = x2.next
+        if x2 == self.tail:
+            self.tail = x1.prev
+        else:
+            x2.next.prev = x1.prev
+        x1.prev = None
+        x2.next = None
         return L2
 
     def splice(self, x, L2):
-        ###########################
-        # Part (c): Implement me! # 
-        ###########################
-        pass
+        xn = x.next
+        L2.head.prev = x
+        x.next = L2.head
+        L2.tail.next = xn
+        if xn:
+            xn.prev = L2.tail
+        else:
+            self.tail = L2.tail
